@@ -8,13 +8,24 @@ public class App {
 
     public static void main(String[] args) {
       //  System.out.println(new App().getGreeting());
-        Vehicle carA = new Vehicle("car1","Audi");
-        Vehicle carB = new Vehicle("car2","Toyota");
-        Car carC = new Car("car3","Honda");
-        carA.speedup(50);
-        carB.speedup(40);
+        Vehicle VehicleA = new Vehicle("Vehicle1","Audi");
+        Vehicle VehicleB = new Vehicle("Vehicle2","Toyota");
+        Vehicle carC = new Car("car3","Honda");
+        Vehicle Bus = new Bus("bus","BusBrand");
+        VehicleA.speedup(50);
+        VehicleB.speedup(40);
         carC.speedup(180);
         carC.speedup(280);
+        Bus.speedup(80);
+
+        Driver Tommy = new Driver(VehicleA,"Tommy");
+        Tommy.speedup(111);
+
+        Driver Ken = new Driver(carC,"Ken");
+        Ken.speedup(666);
+
+        Driver Jacky = new Driver(Bus,"Jacky");
+        Jacky.speedup(70);
     }
 }
 
@@ -27,6 +38,22 @@ class Car extends Vehicle{
     public void speedup(int speed){
         if (speed <= 200){
             super.speedup(speed);
+            System.out.println("___I am car__");
+        }
+        else
+            System.out.println("Speed Up Failed!!");
+    }
+}
+class Bus extends Vehicle{
+    public Bus(String name,String brand){
+        super(name, brand);
+    }
+
+    @Override
+    public void speedup(int speed){
+        if (speed <= 80){
+            super.speedup(speed);
+            System.out.println("___I am bus__");
         }
         else
             System.out.println("Speed Up Failed!!");
@@ -44,4 +71,21 @@ class Vehicle{
     public void speedup(int speed){
         System.out.println("Name :" + this.name + " Brand :" + this.brand + " speedup to " + speed + "km");
     }
+}
+
+class Driver{
+    private final Vehicle vehicle;
+    private final  String name;
+
+    public  Driver (Vehicle vehicle, String name){
+        this.vehicle =vehicle;
+        this.name =name;
+    }
+
+    public void speedup(int increase){
+        System.out.println("Driver NAme: " + this.name);
+        vehicle.speedup(increase);
+    }
+
+
 }
